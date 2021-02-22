@@ -38,4 +38,18 @@ router.put('/:id', validateProject(), validateProjectID(), (req, res, next) => {
 })
 // [DELETE] /api/projects/:id returns no response body.
 
+router.delete('/:id', validateProjectID(), (req, res, next) => {
+    projects.remove(req.params.id)
+    .then((count) => {
+        if (count > 0){
+            res.status(200).json(count)
+        } else{
+            res.status(404).json({
+                message: "Project could not be removed"
+            })
+        }
+    })
+    .catch(next)
+})
+
 module.exports = router;
