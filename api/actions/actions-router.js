@@ -51,4 +51,18 @@ router.put('/:id', validateAction(), validateActionID(), (req, res, next) => {
 })
 // [DELETE] /api/actions/:id returns no response body.
 
+router.delete('/:id', validateActionID(), (req, res, next) => {
+    actions.remove(req.params.id)
+    .then((count) => {
+        if (count > 0){
+            res.status(200).json(count)
+        } else{
+            res.status(404).json({
+                message: "Action could not be removed"
+            })
+        }
+    })
+    .catch(next)
+})
+
 module.exports = router;
