@@ -19,6 +19,14 @@ router.get('/:id', validateProjectID(), (req, res) => {
     res.json(req.project)
 })
 // [POST] /api/projects returns the newly created project as the body of the response.
+
+router.post('/', validateProject(), (req, res, next) => {
+    projects.insert(req.body)
+    .then((project) => {
+        res.status(201).json(project)
+    })
+    .catch(next)
+})
 // [PUT] /api/projects/:id returns the updated project as the body of the response.
 // [DELETE] /api/projects/:id returns no response body.
 
