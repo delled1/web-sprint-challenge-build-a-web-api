@@ -3,7 +3,7 @@
 const express = require('express')
 const actions = require("./actions-model")
 const router = express.Router()
-const { validateActionID, validateAction,  } = require("../middleware/middleware")
+const { validateActionID, validateAction } = require("../middleware/middleware")
 
 
 // [GET] /api/actions returns an array of actions (or an empty array) as the body of the response.
