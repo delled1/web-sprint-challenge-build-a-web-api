@@ -19,9 +19,18 @@ router.get('/', (req, res, next) => {
 
 // [GET] /api/actions/:id returns an action with the given id as the body of the response.
 
-router.get('/:id', validateActionID(), (req,res) => {
-
-    res.json(req.action)
+router.get('/:id', validateActionID(), (req,res, next) => {
+    actions.get(req.params.id) 
+    .then((action) => {
+        if(action) {
+            res.status(200).json(action)
+        } else{
+            res.status(404).json({
+                message: "Could not find project"
+            })
+        }
+    })
+    .catch(next)
 })
 
 // [POST] /api/actions returns the newly created action as the body of the response.

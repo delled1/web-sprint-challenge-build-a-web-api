@@ -15,8 +15,18 @@ router.get('/', (req, res, next) => {
 })
 // [GET] /api/projects/:id returns a project with the given id as the body of the response.
 
-router.get('/:id', validateProjectID(), (req, res) => {
-    res.json(req.project)
+router.get('/:id', validateProjectID(), (req, res, next) => {
+    projects.get(req.params.id) 
+    .then((project) => {
+        if(project) {
+            res.status(200).json(project)
+        } else{
+            res.status(404).json({
+                message: "Could not find project"
+            })
+        }
+    })
+    .catch(next)
 })
 // [POST] /api/projects returns the newly created project as the body of the response.
 
