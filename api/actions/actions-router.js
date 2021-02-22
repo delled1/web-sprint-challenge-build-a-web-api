@@ -35,6 +35,20 @@ router.post('/', validateAction(), (req, res, next) => {
     .catch(next)
 })
 // [PUT] /api/actions/:id returns the updated action as the body of the response.
+
+router.put('/:id', validateAction(), validateActionID(), (req, res, next) => {
+    actions.update(req.params.id, req.body)
+    .then((action) => {
+        if (action) {
+            res.status(200).json(action)
+        } else{ 
+            res.status(404).json({
+                message: "The action cound not be found"
+            })
+        }
+    })
+    .catch(next)
+})
 // [DELETE] /api/actions/:id returns no response body.
 
 module.exports = router;

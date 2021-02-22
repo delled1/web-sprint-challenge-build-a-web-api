@@ -30,6 +30,11 @@ function validateAction() {
                 message: "Missing action data"
             })
         }
+        if (!req.body.project_id){
+            return res.status(400).json({
+                message:"Missing ID"
+            })
+        }
         if (!req.body.description){
             return res.status(400).json({
                 message:"Missing description"
