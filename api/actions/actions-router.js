@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 
 // [GET] /api/actions/:id returns an action with the given id as the body of the response.
 
-router.get('/:id', validateActionID(), (req,res, next) => {
+router.get('/:id', validateActionID(), (req,res, ) => {
     actions.get(req.params.id) 
     .then((action) => {
         if(action) {
@@ -30,7 +30,7 @@ router.get('/:id', validateActionID(), (req,res, next) => {
             })
         }
     })
-    .catch(next)
+    // .catch(next)
 })
 
 // [POST] /api/actions returns the newly created action as the body of the response.

@@ -57,7 +57,7 @@ function validateProjectID() {
                 req.project = project
                 next()
             } else {
-                res.status(400).json({
+                res.status(404).json({
                     message: "Project not found"
                 })
             }
