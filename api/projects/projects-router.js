@@ -28,6 +28,14 @@ router.post('/', validateProject(), (req, res, next) => {
     .catch(next)
 })
 // [PUT] /api/projects/:id returns the updated project as the body of the response.
+
+router.put('/:id', validateProject(), validateProjectID(), (req, res, next) => {
+    projects.update(req.params.id, req.body)
+    .then((project) => {
+        res.status(200).json(project)
+    })
+    .catch(next)
+})
 // [DELETE] /api/projects/:id returns no response body.
 
 module.exports = router;
